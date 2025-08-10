@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Города - Увлекательная географическая игра</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Экран выбора страны -->
+        <div id="country-screen" class="screen active">
+            <h1 id="game-title" data-i18n="game_title">Словесная игра "Города"</h1>
+            <h2 class="title" data-i18n="select_country">Выберите страну</h2>
+            <div class="countries-grid" id="countries-container"></div>
+            <div class="language-selector">
+                <!-- <button class="lang-btn" data-lang="ru">Русский</button> -->
+                <!-- <button class="lang-btn" data-lang="en">English</button> -->
+
+                <!-- <button class="lang-btn" data-lang="tr">Türkçe</button> -->
+                <!-- <button class="lang-btn" data-lang="cn">中文</button> -->
+            </div>
+        </div>
+
+        <!-- Игровой экран -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <button id="back-to-country-btn" class="back-btn" title="Меню" data-i18n="back_to_country_warning">←</button>
+                <div class="game-stat">
+                    <span data-i18n="lives">Жизни</span>
+                    <div class="hearts" id="lives"></div>
+                </div>
+                <div class="game-stat">
+                    <span data-i18n="score">Очки</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="country-info">
+                    <img id="country-flag" alt="Флаг страны">
+                    <div id="country-name"></div>
+                </div>
+                <div class="game-stat">
+                    <span data-i18n="timer">Время</span>
+                    <span id="timer">30</span>
+                </div>
+            </div>
+
+            <div class="game-content">
+                
+                <div class="last-city" id="last-city"></div>
+                <div class="current-letter-container">
+                    <span data-i18n="current_letter">Назовите город на букву</span>
+                    <div class="current-letter" id="current-letter"></div>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="city-input" data-i18n-placeholder="enter_city" placeholder="Введите город">
+                    <button id="submit-btn" data-i18n="submit">Отправить</button>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <!-- Экран окончания игры -->
+        <div id="end-screen" class="screen">
+            <h2 id="result-title" data-i18n="game_over">Игра окончена</h2>
+            <p data-i18n="final_score">Ваш счет: <span id="final_score">0</span></p>
+
+            <div class="action-buttons">
+                <button id="play-again-btn" data-i18n="play_again">Играть снова</button>
+                <button id="menu-btn" data-i18n="back_to_menu">В меню</button>
+                <button id="reward-ad-btn" class="reward-btn" data-i18n="watch_ad_for_life">
+                Посмотреть рекламу за +1 жизнь
+                </button>
+            </div>
+        </div>
+
+        <!-- Уведомления -->
+        <div id="notification" class="notification"></div>
+         <!-- Модальное окно подтверждения -->
+        <div id="confirm-modal" class="modal">
+            <div class="modal-content">
+                <p data-i18n="confirm_leave">Вы уверены, что хотите вернуться к выбору страны? Весь прогресс текущей игры будет утерян.</p>
+                <div class="modal-buttons">
+                    <button id="confirm-leave" data-i18n="yes">Да</button>
+                    <button id="cancel-leave" data-i18n="no">Нет</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
