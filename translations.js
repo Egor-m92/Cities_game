@@ -1,6 +1,6 @@
 const translations = {
     ru: {
-        game_title: "Словесная игра 'Города'",
+        game_title: "Города: Словесный бой",
         select_country: "Выберите страну",
         lives: "Жизни",
         score: "Очки",
@@ -8,9 +8,9 @@ const translations = {
         enter_city: "Введите город",
         submit: "Отправить",
         current_letter: "Назовите город на букву",
-        game_over: "Игра окончена",
+        game_over: "Игра окончена. Закончились жизни. Посморите рекламу для востановления 1 жизни или зайдите на следующий день, жизни восстановятся.",
         you_win: "Победа!",
-        final_score: "Ваш счет",
+        final_score_label: "Ваш счет:",
         play_again: "Играть снова",
         back_to_menu: "В меню",
         leaderboard: "Таблица лидеров",
@@ -25,22 +25,24 @@ const translations = {
         no_lives_left: "У вас закончились жизни. Игра окончена.",
         add_live: "+1 жизнь!",
         max_lives: "Вы достигли максимума жизней!",
+        back_to_country_warning: "←",
+        watch_ad_for_life: "Посмотреть рекламу за +1 жизнь",
+        confirm_leave: "Вы уверены, что хотите вернуться к выбору страны? Весь прогресс текущей игры будет утерян.",
+        yes: "Да",
+        no: "Нет",
         
         countries: {
             russia: "Россия",
             belarus: "Беларусь",
-            turkey: "Турция",
-            china: "Китай",
-            germany: "Германия",
-            france: "Франция",
-            italy: "Италия",
+            europe: "Европа",
+            asia: "Азия",
             usa: "США",
             world: "Мир"
         }
     },
 
     en: {
-        game_title: "Word game 'Cities'",
+        game_title: "Cities: Verbal Fight",
         select_country: "Select country",
         lives: "Lives:",
         score: "Points:",
@@ -48,9 +50,9 @@ const translations = {
         enter_city: "Enter city",
         submit: "Submit",
         current_letter: "Name the city starting with the letter",
-        game_over: "Game Over",
+        game_over: "Game Over. Lives are gone. Watch an ad to restore 1 life or come back the next day, lives will be restored.",
         you_win: "Victory!",
-        final_score: "Your score",
+        final_score_label: "Your score:",
         play_again: "Play again",
         back_to_menu: "Menu",
         leaderboard: "Leaderboard",
@@ -65,15 +67,17 @@ const translations = {
         no_lives_left: "You have no lives left. Game over.",
         add_live: "+1 life",
         max_lives: "You have reached the maximum number of lives!",
+        back_to_country_warning: "←",
+        watch_ad_for_life: "Watch ad for +1 life",
+        confirm_leave: "Are you sure you want to go back to country selection? All progress in the current game will be lost.",
+        yes: "Yes",
+        no: "No",
         
         countries: {
             russia: "Russia",
             belarus: "Belarus",
-            turkey: "Turkey",
-            china: "China",
-            germany: "Germany",
-            france: "France",
-            italy: "Italy",
+            europe: "Europe",
+            asia: "Asia",
             usa: "USA",
             world: "World"
         }
