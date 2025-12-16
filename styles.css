@@ -50,7 +50,7 @@ html, body {
 
 .screen {
     display: none;
-    background-image: url(/brpo.png);
+    background-image: url(../brpo.png);
     background-size: cover;
     border-radius: 16px;
     padding: 20px;
@@ -162,6 +162,19 @@ img {
     margin: 5px;
     padding: 8px 12px;
     font-size: 0.9rem;
+}
+
+#name-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5dvh;
+}
+
+#name {
+    display: flex;
+    justify-content: center;
+    margin-left:  15px;
 }
 
 .game-screen {
@@ -527,8 +540,8 @@ button:hover {
 }
 
 .player-avatar {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     display: none;

@@ -25,33 +25,7 @@ class CityGame {
         this.initElements();
         this.loadGame();
         this.setupEventListeners();
-        this.initPlayer();
-    }
-
-    async initPlayer() {
-        this.player = {
-            id: 'local-player',
-            name: 'Гость',
-            avatar: 'default-avatar.jpg',
-            mode: 'lite'
-        };
-        this.updatePlayerUI();
-    }
-
-    updatePlayerUI() {
-        if (!this.player) return;
         
-        const playerNameElement = document.getElementById('player-name');
-        const playerAvatarElement = document.getElementById('player-avatar');
-        
-        if (playerNameElement) {
-            playerNameElement.textContent = this.player.name || 'Игрок';
-        }
-        
-        if (playerAvatarElement) {
-            playerAvatarElement.src = this.player.avatar || 'default-avatar.jpg';
-            playerAvatarElement.style.display = 'block';
-        }
     }
 
     initElements() {
@@ -107,31 +81,36 @@ class CityGame {
                 <small>${countryData.cities[this.currentLang]?.length || 0} ${translations[this.currentLang]?.cities || 'городов'}</small>
             `;
             
-            card.addEventListener('click', () => {
-                if (this.lives > 0) {
-                    this.selectCountry(country);
-                } else {
-                    this.showNotification(translations[this.currentLang]?.no_lives_left || "Нет жизней");
-                    this.showScreen('end');
-                }
+            card.addEventListener('click', () => {                
+                this.selectCountry(country);
             });
-            
             this.elements.countriesContainer.appendChild(card);
         });
     }
     
     selectCountry(country) {
-        if (this.lives <= 0) {
-            this.showNotification(translations[this.currentLang]?.no_lives_left || "Нет жизней");
-            this.showScreen('end');
-            return;
+        const nameInput = document.getElementById('name');
+        const playerName = nameInput.value.trim();
+        const playerNameElement = document.getElementById('player-name');
+        const playerAvatarElement = document.getElementById('player-avatar');
+    
+        if (playerName === '') {
+            playerNameElement.textContent = 'Игрок';
+        } else {
+            playerNameElement.textContent = playerName;
         }
 
+        this.lives = 3;
         this.currentCountry = country;
         this.elements.countryName.textContent = translations[this.currentLang]?.countries?.[country] || country;
         this.elements.countryFlag.src = `flags/${this.cities[country].flag}.svg`;
+
+        playerAvatarElement.src = 'avatar.png';
+        document.getElementById('player-avatar').style.display = 'block';
+
         this.startGame();
         this.showScreen('game');
+        this.loadLeaderboard(playerName);
     }
     
     startGame() {
@@ -337,7 +316,7 @@ class CityGame {
         this.saveProgress();
         
         // Загружаем таблицу лидеров
-        this.loadLeaderboard();
+        this.loadLeaderboard(playerName);
     }
     
     async submitScore(score) {
@@ -347,13 +326,13 @@ class CityGame {
         return Promise.resolve();
     }
     
-    async loadLeaderboard() {
+    async loadLeaderboard(player) {
         const leaderboardElement = document.getElementById('leaderboard');
         if (!leaderboardElement) return;
         
         // Заглушка для загрузки таблицы лидеров
         const leaderboardData = [
-            { name: 'Гость', score: this.score },
+            { name: player, score: this.score },
             { name: 'Игрок 2', score: 150 },
             { name: 'Игрок 3', score: 120 },
             { name: 'Игрок 4', score: 90 },
@@ -652,7 +631,6 @@ class CityGame {
     }
 }
 
-// Инициализация игры при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     window.game = new CityGame();
 });

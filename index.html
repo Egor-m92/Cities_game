@@ -12,6 +12,10 @@
         <!-- Экран выбора страны -->
         <div id="country-screen" class="screen active">
             <h1 id="game-title" data-i18n="game_title">Города: Словесный бой</h1>
+            <div id="name-block">
+                <h5>Введите имя</h5>
+                <input type="text" id="name" name="name" required minlength="1" maxlength="10" size="20">
+            </div>
             <h2 class="title" data-i18n="select_country">Выберите страну</h2>
             <div class="countries-grid" id="countries-container"></div>
         </div>
@@ -21,7 +25,7 @@
             <div class="game-header">
                 <button id="back-to-country-btn" class="back-btn" title="Меню" data-i18n="back_to_country_warning">←</button>
                 <div class="player-info" id="player-info">
-                    <img id="player-avatar" src="default-avatar.jpg" alt="Аватар" class="player-avatar">
+                    <img id="player-avatar" src="avatar.png" alt="Аватар" class="player-avatar">
                     <span id="player-name">Гость</span>
                 </div>
                 <div class="game-stat">
