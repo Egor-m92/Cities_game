@@ -50,7 +50,7 @@ html, body {
 
 .screen {
     display: none;
-    background-image: url('brpo.png');
+    background-image: url('https://raw.githubusercontent.com/Egor-m92/Cities_game/main/brpo.png');
     background-size: cover;
     border-radius: 16px;
     padding: 20px;
