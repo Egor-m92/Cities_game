@@ -50,7 +50,7 @@ html, body {
 
 .screen {
     display: none;
-    background-image: url('/brpo.png');
+    background-image: url('./brpo.png');
     background-size: cover;
     border-radius: 16px;
     padding: 20px;
