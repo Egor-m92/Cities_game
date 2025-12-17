@@ -1,7 +1,7 @@
 const translations = {
     ru: {
         game_title: "Города: Словесный бой",
-        select_country: "Выберите страну",
+        select_country: "Выберите область",
         lives: "Жизни",
         score: "Очки",
         timer: "Время",
@@ -32,12 +32,12 @@ const translations = {
         no: "Нет",
         
         countries: {
-            russia: "Россия",
-            belarus: "Беларусь",
-            europe: "Европа",
-            asia: "Азия",
-            usa: "США",
-            world: "Мир"
+            brest: "Брестская область",
+            vitebsk: "Витебская область",
+            gomel: "Гомельская область",
+            grodno: "Гродненская область",
+            minsk: "Минская область",
+            mogilev: "Могилевская область"
         }
     },
 

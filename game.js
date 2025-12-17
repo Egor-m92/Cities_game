@@ -110,7 +110,7 @@ class CityGame {
 
         this.startGame();
         this.showScreen('game');
-        this.loadLeaderboard(playerName);
+        this.loadLeaderboard(playerName, this.score);
     }
     
     startGame() {
@@ -147,14 +147,40 @@ class CityGame {
     }
     
     getLastLetter(city) {
-        let lastLetter = city.slice(-1).toLowerCase();
-        if (['ь', 'ъ', 'ы', 'й'].includes(lastLetter)) {
-            lastLetter = city.slice(-2, -1).toLowerCase();
-            if (['ь', 'ъ', 'ы', 'й'].includes(lastLetter)) {
-                lastLetter = city.slice(-3, -2).toLowerCase();
-            }
+        const cityLower = city.toLowerCase();
+    const availableCities = this.getAvailableCities();
+    
+    // Проверяем последние 3 буквы
+    for (let i = 1; i <= 3; i++) {
+        let checkLetter = cityLower.slice(-i, -i + 1 || undefined);
+        
+        // Пропускаем буквы-исключения
+        if (['ь', 'ъ', 'ы', 'й'].includes(checkLetter)) {
+            continue;
         }
-        return lastLetter;
+        
+        // Проверяем, есть ли город на эту букву среди доступных
+        const hasCity = availableCities.some(availableCity => 
+            availableCity.toLowerCase().startsWith(checkLetter)
+        );
+        
+        if (hasCity) {
+            return checkLetter;
+        }
+    }
+    
+    // Если не нашли подходящую букву с доступными городами
+    // Возвращаем первую подходящую букву (без проверки доступности)
+    for (let i = 1; i <= 3; i++) {
+        let checkLetter = cityLower.slice(-i, -i + 1 || undefined);
+        
+        if (!['ь', 'ъ', 'ы', 'й'].includes(checkLetter)) {
+            return checkLetter;
+        }
+    }
+    
+    // Запасной вариант
+    return cityLower[0] || 'а';
     }
     
     getAvailableCities() {
@@ -266,14 +292,27 @@ class CityGame {
     computerMove() {
         const cities = this.getAvailableCities();
         if (cities.length > 0) {
-            const city = cities[Math.floor(Math.random() * cities.length)];
+        // Фильтруем города, начинающиеся на текущую букву
+        const citiesOnLetter = cities.filter(city => 
+            this.currentLetter ? 
+            city.toLowerCase().startsWith(this.currentLetter) : 
+            true
+        );
+        
+        if (citiesOnLetter.length > 0) {
+            const city = citiesOnLetter[Math.floor(Math.random() * citiesOnLetter.length)];
             this.processComputerMove(city);
         } else {
-            this.showNotification(translations[this.currentLang]?.computer_no_city || "У компьютера нет подходящих городов");
-            this.endGame(true);
+            // Если на текущую букву нет городов, берем любой доступный
+            const city = cities[Math.floor(Math.random() * cities.length)];
+            this.processComputerMove(city);
         }
-        
-        this.updateUI();
+    } else {
+        this.showNotification(translations[this.currentLang]?.computer_no_city || "У компьютера нет подходящих городов");
+        this.endGame(true);
+    }
+    
+    this.updateUI();
     }
     
     loseLife() {
@@ -316,7 +355,7 @@ class CityGame {
         this.saveProgress();
         
         // Загружаем таблицу лидеров
-        this.loadLeaderboard(playerName);
+        this.loadLeaderboard(playerName, finalScore);
     }
     
     async submitScore(score) {
@@ -326,13 +365,13 @@ class CityGame {
         return Promise.resolve();
     }
     
-    async loadLeaderboard(player) {
+    async loadLeaderboard(player, score) {
         const leaderboardElement = document.getElementById('leaderboard');
         if (!leaderboardElement) return;
         
         // Заглушка для загрузки таблицы лидеров
         const leaderboardData = [
-            { name: player, score: this.score },
+            { name: player, score: score },
             { name: 'Игрок 2', score: 150 },
             { name: 'Игрок 3', score: 120 },
             { name: 'Игрок 4', score: 90 },
